@@ -3,8 +3,18 @@
 
 import Foundation
 
-public struct NCCommunicationStacks: Codable {
+public struct NCCommunicationCards: Codable {
     
+}
+
+public struct NCCommunicationStacks: Codable {
+    public var title: String = ""
+    public var boardId: Int = 0
+    public var deletedAt: Int = 0
+    public var lastModified: Int = 0
+    public var cards: [NCCommunicationCards]
+    public var order: Int = 0
+    public var id: Int = 0
 }
 
 public struct NCCommunicationLabels: Codable {

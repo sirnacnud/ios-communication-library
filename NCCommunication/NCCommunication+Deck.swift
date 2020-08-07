@@ -42,6 +42,43 @@ extension NCCommunication {
         }
     }
     
+    public func getStacks(boardID: Int, customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ stacks: [NCCommunicationStacks]?, _ errorCode: Int, _ errorDescription: String) -> Void) {
+        
+        let account = NCCommunicationCommon.shared.account
+        let serverUrlEndpoint = NCCommunicationCommon.shared.url + "/index.php/apps/deck/api/v1.0/boards/\(boardID)/stacks"
+        
+        guard let url = NCCommunicationCommon.shared.encodeStringToUrl(serverUrlEndpoint) else {
+            completionHandler(account, nil, NSURLErrorBadURL, NSLocalizedString("_invalid_url_", value: "Invalid server url", comment: ""))
+            return
+        }
+        
+        let method = HTTPMethod(rawValue: "GET")
+        
+        var headers = NCCommunicationCommon.shared.getStandardHeaders(addCustomHeaders, customUserAgent: customUserAgent)
+        headers.update(.contentType("application/json"))
+        
+        sessionManager.request(url, method: method, parameters: nil, encoding: URLEncoding.default, headers: headers).validate(statusCode: 200..<300).responseJSON() {
+            (response) in
+            debugPrint(response)
+            
+            switch response.result {
+            case .failure(let error):
+                let error = NCCommunicationError().getError(error: error, httResponse: response.response)
+                completionHandler(account, nil, error.errorCode, error.description ?? "")
+            case .success( _):
+                if let data = response.data {
+                    if let jsonResponse = String(data: data, encoding: String.Encoding.utf8) {
+                        let decoder = JSONDecoder()
+                        let stacks = try? decoder.decode([NCCommunicationStacks].self, from: Data(jsonResponse.utf8))
+                        completionHandler(account, stacks, 0, "")
+                    }
+                } else {
+                    completionHandler(account, nil, NSURLErrorBadServerResponse, NSLocalizedString("_error_decode_xml_", value: "Invalid response, error decode XML", comment: ""))
+                }
+            }
+        }
+    }
+    
     //    @objc public func putComments(fileId: String, message: String, customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ errorCode: Int, _ errorDescription: String) -> Void) {
     //
     //        let account = NCCommunicationCommon.shared.account
