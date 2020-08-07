@@ -1,82 +1,111 @@
 [
-   {
-      "title":"Personal",
-      "owner":{
-         "primaryKey":"test",
-         "uid":"test",
-         "displayname":"Test Slim",
-         "type":0
-      },
-      "color":"0087C5",
-      "archived":false,
-      "labels":[
-
-      ],
-      "acl":[
-
-      ],
-      "permissions":{
-         "PERMISSION_READ":true,
-         "PERMISSION_EDIT":true,
-         "PERMISSION_MANAGE":true,
-         "PERMISSION_SHARE":true
-      },
-      "users":[
-
-      ],
-      "shared":0,
-      "stacks":[
-
-      ],
-      "deletedAt":0,
-      "lastModified":1596771365,
-      "id":3
-   },
-   {
-      "title":"ios-deck",
-      "owner":{
-         "primaryKey":"zac",
-         "uid":"zac",
-         "displayname":"Zac",
-         "type":0
-      },
-      "color":"5b64b3",
-      "archived":false,
-      "labels":[
-
-      ],
-      "acl":[
-         {
-            "participant":{
-               "primaryKey":"test",
-               "uid":"test",
-               "displayname":"Test Slim",
-               "type":0
-            },
-            "type":0,
-            "boardId":2,
-            "permissionEdit":false,
-            "permissionShare":false,
-            "permissionManage":false,
-            "owner":false,
-            "id":1
-         }
-      ],
-      "permissions":{
-         "PERMISSION_READ":true,
-         "PERMISSION_EDIT":false,
-         "PERMISSION_MANAGE":false,
-         "PERMISSION_SHARE":false
-      },
-      "users":[
-
-      ],
-      "shared":1,
-      "stacks":[
-
-      ],
-      "deletedAt":0,
-      "lastModified":1596771397,
-      "id":2
-   }
+    {
+        "title":"Personal",
+        "owner":{
+            "primaryKey":"test",
+            "uid":"test",
+            "displayname":"Test Slim",
+            "type":0
+        },
+        "color":"0087C5",
+        "archived":false,
+        "labels":[
+            
+        ],
+        "acl":[
+            
+        ],
+        "permissions":{
+            "PERMISSION_READ":true,
+            "PERMISSION_EDIT":true,
+            "PERMISSION_MANAGE":true,
+            "PERMISSION_SHARE":true
+        },
+        "users":[
+            
+        ],
+        "shared":0,
+        "stacks":[
+            
+        ],
+        "deletedAt":0,
+        "lastModified":1596771365,
+        "id":3
+    },
+    {
+        "title":"ios-deck",
+        "owner":{
+            "primaryKey":"zac",
+            "uid":"zac",
+            "displayname":"Zac",
+            "type":0
+        },
+        "color":"5b64b3",
+        "archived":false,
+        "labels":[
+            
+        ],
+        "acl":[
+            {
+                "participant":{
+                    "primaryKey":"test",
+                    "uid":"test",
+                    "displayname":"Test Slim",
+                    "type":0
+                },
+                "type":0,
+                "boardId":2,
+                "permissionEdit":false,
+                "permissionShare":false,
+                "permissionManage":false,
+                "owner":false,
+                "id":1
+            }
+        ],
+        "permissions":{
+            "PERMISSION_READ":true,
+            "PERMISSION_EDIT":false,
+            "PERMISSION_MANAGE":false,
+            "PERMISSION_SHARE":false
+        },
+        "users":[
+            
+        ],
+        "shared":1,
+        "stacks":[
+            
+        ],
+        "deletedAt":0,
+        "lastModified":1596771397,
+        "id":2
+    }
 ]
+ 
+ {
+    archived = 0;
+    assignedUsers =             (
+    );
+    attachmentCount = 0;
+    attachments = "<null>";
+    commentsUnread = 0;
+    createdAt = 1596702384;
+    deletedAt = 0;
+    description = "";
+    duedate = "<null>";
+    id = 17;
+    labels =             (
+    );
+    lastEditor = "<null>";
+    lastModified = 1596702387;
+    order = 0;
+    overdue = 0;
+    owner =             {
+        displayname = Zac;
+        primaryKey = zac;
+        type = 0;
+        uid = zac;
+    };
+    stackId = 6;
+    title = "complete login flow";
+    type = plain;
+}
