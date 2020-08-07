@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11B4C3EF24DCFA0A0073C176 /* NCCommunication+Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4C3EE24DCFA0A0073C176 /* NCCommunication+Deck.swift */; };
+		11B4C3F124DCFDAB0073C176 /* NCCommunicationModel+Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4C3F024DCFDAB0073C176 /* NCCommunicationModel+Deck.swift */; };
 		F72E160D2478105D00678FBE /* NCCommunication+E2EE.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72E160C2478105D00678FBE /* NCCommunication+E2EE.swift */; };
 		F73B422E24767E0B00A30FD3 /* NCCommunication+Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B422D24767E0B00A30FD3 /* NCCommunication+Comments.swift */; };
 		F74AA2542464034500DD13B1 /* NCCommunication+NCText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74AA2532464034500DD13B1 /* NCCommunication+NCText.swift */; };
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11B4C3EE24DCFA0A0073C176 /* NCCommunication+Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NCCommunication+Deck.swift"; sourceTree = "<group>"; };
+		11B4C3F024DCFDAB0073C176 /* NCCommunicationModel+Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NCCommunicationModel+Deck.swift"; sourceTree = "<group>"; };
 		F72E160C2478105D00678FBE /* NCCommunication+E2EE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NCCommunication+E2EE.swift"; sourceTree = "<group>"; };
 		F73B422D24767E0B00A30FD3 /* NCCommunication+Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NCCommunication+Comments.swift"; sourceTree = "<group>"; };
 		F74AA2532464034500DD13B1 /* NCCommunication+NCText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NCCommunication+NCText.swift"; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 				F7D0A5372477C37C002F2164 /* NCCommunication+PushNotification.swift */,
 				F72E160C2478105D00678FBE /* NCCommunication+E2EE.swift */,
 				F7FE196D23757BEB001465E3 /* NCCommunicationError.swift */,
+				11B4C3EE24DCFA0A0073C176 /* NCCommunication+Deck.swift */,
+				11B4C3F024DCFDAB0073C176 /* NCCommunicationModel+Deck.swift */,
 			);
 			path = NCCommunication;
 			sourceTree = "<group>";
@@ -203,7 +209,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1110;
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Marino Faggiana";
 				TargetAttributes = {
 					F74D5C29235DE83B0006DA38 = {
@@ -256,9 +262,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11B4C3EF24DCFA0A0073C176 /* NCCommunication+Deck.swift in Sources */,
 				F74AA258246405B200DD13B1 /* NCCommunication+API.swift in Sources */,
 				F74D5C48235DE8F80006DA38 /* NCCommunication.swift in Sources */,
 				F7BBE0002472F42200C3B0E2 /* NCCommunication+Richdocuments.swift in Sources */,
+				11B4C3F124DCFDAB0073C176 /* NCCommunicationModel+Deck.swift in Sources */,
 				F72E160D2478105D00678FBE /* NCCommunication+E2EE.swift in Sources */,
 				F74AA2542464034500DD13B1 /* NCCommunication+NCText.swift in Sources */,
 				F7EC2DDD2372FBC0008E28EF /* NCCommunicationBackground.swift in Sources */,
@@ -318,6 +326,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -381,6 +390,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
