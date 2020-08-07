@@ -5,7 +5,7 @@ import Foundation
 import Alamofire
 
 extension NCCommunication {
-    public func getBoards(customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ items: [NCCommunicationBoards]?, _ errorCode: Int, _ errorDescription: String) -> Void) {
+    public func getBoards(customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ boards: [NCCommunicationBoards]?, _ errorCode: Int, _ errorDescription: String) -> Void) {
         
         let account = NCCommunicationCommon.shared.account
         let serverUrlEndpoint = NCCommunicationCommon.shared.url + "/index.php/apps/deck/api/v1.0/boards"
@@ -23,26 +23,19 @@ extension NCCommunication {
         sessionManager.request(url, method: method, parameters: nil, encoding: URLEncoding.default, headers: headers).validate(statusCode: 200..<300).responseJSON() {
             (response) in
             debugPrint(response)
-//            response.response?.body
-        
+            
             switch response.result {
             case .failure(let error):
                 let error = NCCommunicationError().getError(error: error, httResponse: response.response)
                 completionHandler(account, nil, error.errorCode, error.description ?? "")
             case .success( _):
                 if let data = response.data {
-                    print("This is the response data: \(data)")
                     if let jsonResponse = String(data: data, encoding: String.Encoding.utf8) {
-                        print("JSON String: \(jsonResponse)")
+                        let decoder = JSONDecoder()
+                        let boards = try? decoder.decode([NCCommunicationBoards].self, from: Data(jsonResponse.utf8))
+                        completionHandler(account, boards, 0, "")
+                        
                     }
-                    
-//                    var boards: [NCCommunicationBoards] = []
-//
-//                    let decoder = JSONDecoder()
-//                    if let jsonBoards = try? decoder.decode(NCCommunicationBoards.self, from: data) {
-//                        boards = jsonBoards
-//                    }
-                    completionHandler(account, nil, 0, "")
                 } else {
                     completionHandler(account, nil, NSURLErrorBadServerResponse, NSLocalizedString("_error_decode_xml_", value: "Invalid response, error decode XML", comment: ""))
                 }
