@@ -44,6 +44,7 @@
 /* Begin PBXFileReference section */
 		11B4C3EE24DCFA0A0073C176 /* NCCommunication+Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NCCommunication+Deck.swift"; sourceTree = "<group>"; };
 		11B4C3F024DCFDAB0073C176 /* NCCommunicationModel+Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NCCommunicationModel+Deck.swift"; sourceTree = "<group>"; };
+		11B4C3F324DD04490073C176 /* GetBoards.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GetBoards.json; sourceTree = "<group>"; };
 		F72E160C2478105D00678FBE /* NCCommunication+E2EE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NCCommunication+E2EE.swift"; sourceTree = "<group>"; };
 		F73B422D24767E0B00A30FD3 /* NCCommunication+Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NCCommunication+Comments.swift"; sourceTree = "<group>"; };
 		F74AA2532464034500DD13B1 /* NCCommunication+NCText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NCCommunication+NCText.swift"; sourceTree = "<group>"; };
@@ -90,6 +91,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11B4C3F224DD042C0073C176 /* Refs */ = {
+			isa = PBXGroup;
+			children = (
+				11B4C3F324DD04490073C176 /* GetBoards.json */,
+			);
+			path = Refs;
+			sourceTree = "<group>";
+		};
 		F74D5C20235DE83B0006DA38 = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +121,7 @@
 		F74D5C2C235DE83B0006DA38 /* NCCommunication */ = {
 			isa = PBXGroup;
 			children = (
+				11B4C3F224DD042C0073C176 /* Refs */,
 				F74D5C2D235DE83B0006DA38 /* NCCommunication.h */,
 				F74D5C44235DE8F80006DA38 /* NCCommunication.swift */,
 				F74D5C47235DE8F80006DA38 /* NCCommunicationCommon.swift */,

@@ -3,29 +3,56 @@
 
 import Foundation
 
-@objc public class NCCommunicationBoardLabels: NSObject {
-    
-    @objc public var title = ""
-    @objc public var color = ""
-    @objc public var boardID: Int = 0
-    @objc public var cardID: Int = 0
-    @objc public var ID: Int = 0
+public struct NCCommunicationStacks: Codable {
     
 }
 
-@objc public class NCCommunicationBoardPermissions: NSObject {
-    
-    @objc public var PERMISSION_READ: Bool = false
-    @objc public var PERMISSION_EDIT: Bool = false
-    @objc public var PERMISSION_MANAGE: Bool = false
-    @objc public var PERMISSION_SHARE: Bool = false
+public struct NCCommunicationLabels: Codable {
+    var title = ""
+    var color = ""
+    var boardID: Int = 0
+    var cardID: Int = 0
+    var ID: Int = 0
 }
 
-@objc public class NCCommunicationBoards: NSObject {
-    
-    @objc public var title = ""
-    @objc public var ownerUID = ""
-    @objc public var ownerDisplayName = ""
-    @objc public var color = ""
-    @objc public var archived: Bool = false
+public struct NCCommunicationBoardUsers: Codable {
+    var primaryKey: String = ""
+    var uid: String = ""
+    var displayName: String = ""
+    var type: Int = 0
+}
+
+public struct NCCommunicationBoards: Codable {
+    var title: String = ""
+    struct owner: Codable {
+        var primaryKey: String = ""
+        var uid: String = ""
+        var displayName: String = ""
+        var type: Int = 0
+    }
+    var color: String = ""
+    var archived: Bool = false
+    var labels: [NCCommunicationLabels]
+    struct acl: Codable {
+        var participant: NCCommunicationBoardUsers
+        var type: Int = 0
+        var boardID: Int = 0
+        var permissionEdit: Bool = false
+        var permissionShare: Bool = false
+        var permissionManage: Bool = false
+        var owner: Bool = false
+        var id: Int = 0
+    }
+    struct permissions: Codable {
+        var PERMISSION_READ: Bool = false
+        var PERMISSION_EDIT: Bool = false
+        var PERMISSION_MANAGE: Bool = false
+        var PERMISSION_SHARE: Bool = false
+    }
+    var users: [NCCommunicationBoardUsers]
+    var shared: Int = 0
+    var stacks: [NCCommunicationStacks]
+    var deletedAt: Int = 0
+    var lastModified: Int = 0
+    var id: Int = 0
 }
