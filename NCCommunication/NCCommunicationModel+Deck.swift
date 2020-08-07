@@ -22,6 +22,7 @@ public struct NCCommunicationCards: Codable {
     public var owner: NCCommunicationDeckUsers
     public var stackId: Int = 0
     public var title: String = ""
+    public var type: String = ""
 }
 
 public struct NCCommunicationStacks: Codable {
