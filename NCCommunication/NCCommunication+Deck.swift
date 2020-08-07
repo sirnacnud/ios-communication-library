@@ -20,7 +20,7 @@ extension NCCommunication {
         var headers = NCCommunicationCommon.shared.getStandardHeaders(addCustomHeaders, customUserAgent: customUserAgent)
         headers.update(.contentType("application/json"))
         
-        sessionManager.request(url, method: method, parameters: nil, encoding: URLEncoding.default, headers: headers).validate(statusCode: 200..<300).responseData {
+        sessionManager.request(url, method: method, parameters: nil, encoding: URLEncoding.default, headers: headers).validate(statusCode: 200..<300).responseJSON() {
             (response) in
             debugPrint(response)
             
@@ -31,6 +31,13 @@ extension NCCommunication {
             case .success( _):
                 if let data = response.data {
                     print("This is the response data: \(data)")
+                    
+//                    var boards: [NCCommunicationBoards] = []
+//                    
+//                    let decoder = JSONDecoder()
+//                    if let jsonBoards = try? decoder.decode(NCCommunicationBoards.self, from: data) {
+//                        boards = jsonBoards
+//                    }
                     completionHandler(account, nil, 0, "")
                 } else {
                     completionHandler(account, nil, NSURLErrorBadServerResponse, NSLocalizedString("_error_decode_xml_", value: "Invalid response, error decode XML", comment: ""))
