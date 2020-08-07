@@ -34,7 +34,6 @@ extension NCCommunication {
                         let decoder = JSONDecoder()
                         let boards = try? decoder.decode([NCCommunicationBoards].self, from: Data(jsonResponse.utf8))
                         completionHandler(account, boards, 0, "")
-                        
                     }
                 } else {
                     completionHandler(account, nil, NSURLErrorBadServerResponse, NSLocalizedString("_error_decode_xml_", value: "Invalid response, error decode XML", comment: ""))
