@@ -23,7 +23,8 @@ extension NCCommunication {
         sessionManager.request(url, method: method, parameters: nil, encoding: URLEncoding.default, headers: headers).validate(statusCode: 200..<300).responseJSON() {
             (response) in
             debugPrint(response)
-            
+//            response.response?.body
+        
             switch response.result {
             case .failure(let error):
                 let error = NCCommunicationError().getError(error: error, httResponse: response.response)
@@ -31,9 +32,12 @@ extension NCCommunication {
             case .success( _):
                 if let data = response.data {
                     print("This is the response data: \(data)")
+                    if let jsonResponse = String(data: data, encoding: String.Encoding.utf8) {
+                        print("JSON String: \(jsonResponse)")
+                    }
                     
 //                    var boards: [NCCommunicationBoards] = []
-//                    
+//
 //                    let decoder = JSONDecoder()
 //                    if let jsonBoards = try? decoder.decode(NCCommunicationBoards.self, from: data) {
 //                        boards = jsonBoards
