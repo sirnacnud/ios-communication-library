@@ -20,7 +20,7 @@ public struct NCCommunicationCards: Codable {
     public var archived: Bool = false
     public var dueDate: String = ""
     public var deletedAt: Int = 0
-    public var commentsUnraid: Int = 0
+    public var commentsUnread: Int = 0
     public var id: Int = 0
     public var overdue: Int = 0
     
@@ -48,7 +48,7 @@ public struct NCCommunicationLabels: Codable {
 public struct NCCommunicationDeckUsers: Codable {
     var primaryKey: String = ""
     var uid: String = ""
-    var displayName: String = ""
+    var displayname: String = ""
     var type: Int = 0
 }
 
