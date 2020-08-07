@@ -301,6 +301,7 @@ extension NCCommunication {
                 if let data = response.data {
                     do {
                         let url = URL.init(fileURLWithPath: fileNameLocalPath)
+                        print(url)
                         try  data.write(to: url, options: .atomic)
                         completionHandler(account, data, 0, "")
                     } catch {
