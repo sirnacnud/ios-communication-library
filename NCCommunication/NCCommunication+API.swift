@@ -300,9 +300,9 @@ extension NCCommunication {
             case .success( _):
                 if let data = response.data {
                     do {
-                        let url = URL.init(fileURLWithPath: fileNameLocalPath)
+                        let url = URL.init(fileURLWithPath: fileNameLocalPath, isDirectory: false)
                         print(url)
-                        try  data.write(to: url, options: .atomic)
+                        try data.write(to: url, options: .atomic)
                         completionHandler(account, data, 0, "")
                     } catch {
                         completionHandler(account, nil, error._code, error.localizedDescription)
