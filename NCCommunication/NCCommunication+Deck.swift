@@ -74,7 +74,7 @@ extension NCCommunication {
                             let stacks = try decoder.decode([NCCommunicationStacks].self, from: Data(jsonResponse.utf8))
                             completionHandler(account, stacks, 0, "")
                         } catch {
-                            completionHandler(account, nil, NSURLErrorBadServerResponse, NSLocalizedString("_error_decode_json_", value: "Invalid response, error decode JSON", comment: ""))
+                            completionHandler(account, nil, NSURLErrorBadServerResponse, error.localizedDescription)
                         }
                     }
                 } else {
