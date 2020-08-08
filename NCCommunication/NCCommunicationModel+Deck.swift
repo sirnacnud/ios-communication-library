@@ -15,10 +15,15 @@ public struct NCCommunicationDeckCards: Codable, Identifiable {
     public var assignedUsers: [NCCommunicationDeckUsers] = []
     public var attachments: String?
     public var attachmentCount: Int = 0
-    public var owner: NCCommunicationDeckUsers
+    public struct owner: Codable {
+        public var primaryKey: String = ""
+        public var uid: String = ""
+        public var displayname: String = ""
+        public var type: Int = 0
+    }
     public var order: Int = 0
     public var archived: Bool = false
-    public var dueDate: String?
+    public var duedate: String?
     public var deletedAt: Int = 0
     public var commentsUnread: Int = 0
     public var id: Int = 0
@@ -66,7 +71,7 @@ public struct NCCommunicationDeckBoards: Codable, Identifiable {
     public struct owner: Codable {
         public var primaryKey: String = ""
         public var uid: String = ""
-        public var displayName: String = ""
+        public var displayname: String = ""
         public var type: Int = 0
     }
     public var color: String = ""
