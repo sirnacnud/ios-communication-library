@@ -35,7 +35,7 @@ public struct NCCommunicationDeckStacks: Codable, Identifiable {
     public var boardId: Int = 0
     public var deletedAt: Int = 0
     public var lastModified: Int = 0
-    public var cards: [NCCommunicationDeckCards]
+    public var cards: [NCCommunicationDeckCards]?
     public var order: Int = 0
     public var id: Int = 0
 }
