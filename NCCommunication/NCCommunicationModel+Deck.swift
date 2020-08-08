@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct NCCommunicationCards: Codable {
+public struct NCCommunicationDeckCards: Codable {
     public var title: String = ""
     public var description: String = ""
     public var stackId: Int = 0
@@ -11,7 +11,7 @@ public struct NCCommunicationCards: Codable {
     public var lastModified: Int = 0
     public var lastEditor: String?
     public var createdAt: Int = 0
-    public var labels: [NCCommunicationLabels] = []
+    public var labels: [NCCommunicationDeckLabels] = []
     public var assignedUsers: [NCCommunicationDeckUsers] = []
     public var attachments: String?
     public var attachmentCount: Int = 0
@@ -23,26 +23,24 @@ public struct NCCommunicationCards: Codable {
     public var commentsUnread: Int = 0
     public var id: Int = 0
     public var overdue: Int = 0
-    
-    
 }
 
-public struct NCCommunicationStacks: Codable {
+public struct NCCommunicationDeckStacks: Codable {
     public var title: String = ""
     public var boardId: Int = 0
     public var deletedAt: Int = 0
     public var lastModified: Int = 0
-    public var cards: [NCCommunicationCards]
+    public var cards: [NCCommunicationDeckCards]
     public var order: Int = 0
     public var id: Int = 0
 }
 
-public struct NCCommunicationLabels: Codable {
+public struct NCCommunicationDeckLabels: Codable {
     var title = ""
     var color = ""
-    var boardID: Int = 0
-    var cardID: Int = 0
-    var ID: Int = 0
+    var boardId: Int = 0
+    var cardId: Int?
+    var id: Int = 0
 }
 
 public struct NCCommunicationDeckUsers: Codable {
@@ -52,36 +50,39 @@ public struct NCCommunicationDeckUsers: Codable {
     var type: Int = 0
 }
 
+public struct NCCommunicationDeckACL: Codable {
+    public var participant: NCCommunicationDeckUsers
+    public var type: Int = 0
+    public var boardID: Int = 0
+    public var permissionEdit: Bool = false
+    public var permissionShare: Bool = false
+    public var permissionManage: Bool = false
+    public var owner: Bool = false
+    public var id: Int = 0
+}
+
+public struct NCCommunicationDeckPermissions: Codable {
+    public var participant: NCCommunicationDeckUsers
+    public var type: Int = 0
+    public var boardID: Int = 0
+    public var permissionEdit: Bool = false
+    public var permissionShare: Bool = false
+    public var permissionManage: Bool = false
+    public var owner: Bool = false
+    public var id: Int = 0
+}
+
 public struct NCCommunicationBoards: Codable, Identifiable {
     public var title: String = ""
-    public struct owner: Codable {
-        public var primaryKey: String = ""
-        public var uid: String = ""
-        public var displayName: String = ""
-        public var type: Int = 0
-    }
+    public var owner: NCCommunicationDeckUsers
     public var color: String = ""
     public var archived: Bool = false
-    public var labels: [NCCommunicationLabels]
-    public struct acl: Codable {
-        public var participant: NCCommunicationDeckUsers
-        public var type: Int = 0
-        public var boardID: Int = 0
-        public var permissionEdit: Bool = false
-        public var permissionShare: Bool = false
-        public var permissionManage: Bool = false
-        public var owner: Bool = false
-        public var id: Int = 0
-    }
-    public struct permissions: Codable {
-        public var PERMISSION_READ: Bool = false
-        public var PERMISSION_EDIT: Bool = false
-        public var PERMISSION_MANAGE: Bool = false
-        public var PERMISSION_SHARE: Bool = false
-    }
+    public var labels: [NCCommunicationDeckLabels]
+    public var acl: [NCCommunicationDeckACL]
+    public var permissions: NCCommunicationDeckPermissions
     public var users: [NCCommunicationDeckUsers]
     public var shared: Int = 0
-    public var stacks: [NCCommunicationStacks]
+    public var stacks: [NCCommunicationDeckStacks]
     public var deletedAt: Int = 0
     public var lastModified: Int = 0
     public var id: Int = 0
