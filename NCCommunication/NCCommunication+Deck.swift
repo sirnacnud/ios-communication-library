@@ -42,7 +42,7 @@ extension NCCommunication {
         }
     }
     
-    public func getStacks(boardID: Int, customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ stacks: [NCCommunicationStacks]?, _ errorCode: Int, _ errorDescription: String) -> Void) {
+    public func getStacks(boardID: Int, customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ stacks: [NCCommunicationDeckStacks]?, _ errorCode: Int, _ errorDescription: String) -> Void) {
         
         let account = NCCommunicationCommon.shared.account
         let serverUrlEndpoint = NCCommunicationCommon.shared.url + "/index.php/apps/deck/api/v1.0/boards/\(boardID)/stacks"
@@ -71,7 +71,7 @@ extension NCCommunication {
                         var errStr = ""
                         let decoder = JSONDecoder()
                         do {
-                            let stacks = try decoder.decode([NCCommunicationStacks].self, from: Data(jsonResponse.utf8))
+                            let stacks = try decoder.decode([NCCommunicationDeckStacks].self, from: Data(jsonResponse.utf8))
                             completionHandler(account, stacks, 0, "")
                         } catch let DecodingError.dataCorrupted(context) {
                             print(context)
