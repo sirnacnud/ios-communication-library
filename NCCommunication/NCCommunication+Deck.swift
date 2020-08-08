@@ -68,24 +68,14 @@ extension NCCommunication {
             case .success( _):
                 if let data = response.data {
                     if let jsonResponse = String(data: data, encoding: String.Encoding.utf8) {
-                        var errStr = ""
                         let decoder = JSONDecoder()
                         do {
                             let stacks = try decoder.decode([NCCommunicationDeckStacks].self, from: Data(jsonResponse.utf8))
                             completionHandler(account, stacks, 0, "")
-                        } catch let DecodingError.dataCorrupted(context) {
-                            print(context)
-                        } catch let DecodingError.keyNotFound(key, context) {
-                            errStr = "Key '\(key)' not found: \(context.debugDescription)\ncodingPath: \(context.codingPath)"
-                        } catch let DecodingError.valueNotFound(value, context) {
-                            errStr = "Value '\(value)' not found: \(context.debugDescription)\ncodingPath: \(context.codingPath)"
-                        } catch let DecodingError.typeMismatch(type, context)  {
-                            errStr = "Type '\(type)' mismatch: \(context.debugDescription)\ncodingPath: \(context.codingPath)"
                         } catch {
-                            errStr = error.localizedDescription
                             print(error)
+                            completionHandler(account, nil, NSURLErrorBadServerResponse, error.localizedDescription)
                         }
-                        completionHandler(account, nil, NSURLErrorBadServerResponse, errStr)
                     }
                 } else {
                     completionHandler(account, nil, NSURLErrorBadServerResponse, NSLocalizedString("_error_decode_xml_", value: "Invalid response, error decode XML", comment: ""))
