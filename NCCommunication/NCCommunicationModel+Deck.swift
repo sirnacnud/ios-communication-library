@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct NCCommunicationDeckCards: Codable {
+public struct NCCommunicationDeckCards: Codable, Identifiable {
     public var title: String = ""
     public var description: String = ""
     public var stackId: Int = 0
@@ -25,7 +25,7 @@ public struct NCCommunicationDeckCards: Codable {
     public var overdue: Int = 0
 }
 
-public struct NCCommunicationDeckStacks: Codable {
+public struct NCCommunicationDeckStacks: Codable, Identifiable {
     public var title: String = ""
     public var boardId: Int = 0
     public var deletedAt: Int = 0
@@ -35,19 +35,19 @@ public struct NCCommunicationDeckStacks: Codable {
     public var id: Int = 0
 }
 
-public struct NCCommunicationDeckLabels: Codable {
-    var title = ""
-    var color = ""
-    var boardId: Int = 0
-    var cardId: Int?
-    var id: Int = 0
+public struct NCCommunicationDeckLabels: Codable, Identifiable {
+    public var title = ""
+    public var color = ""
+    public var boardId: Int = 0
+    public var cardId: Int?
+    public var id: Int = 0
 }
 
 public struct NCCommunicationDeckUsers: Codable {
-    var primaryKey: String = ""
-    var uid: String = ""
-    var displayname: String = ""
-    var type: Int = 0
+    public var primaryKey: String = ""
+    public var uid: String = ""
+    public var displayname: String = ""
+    public var type: Int = 0
 }
 
 public struct NCCommunicationDeckACL: Codable {
