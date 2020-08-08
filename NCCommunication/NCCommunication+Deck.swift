@@ -5,7 +5,7 @@ import Foundation
 import Alamofire
 
 extension NCCommunication {
-    public func getBoards(customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ boards: [NCCommunicationBoards]?, _ errorCode: Int, _ errorDescription: String) -> Void) {
+    public func getBoards(customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ boards: [NCCommunicationDeckBoards]?, _ errorCode: Int, _ errorDescription: String) -> Void) {
         
         let account = NCCommunicationCommon.shared.account
         let serverUrlEndpoint = NCCommunicationCommon.shared.url + "/index.php/apps/deck/api/v1.0/boards"
@@ -32,7 +32,7 @@ extension NCCommunication {
                 if let data = response.data {
                     if let jsonResponse = String(data: data, encoding: String.Encoding.utf8) {
                         let decoder = JSONDecoder()
-                        let boards = try? decoder.decode([NCCommunicationBoards].self, from: Data(jsonResponse.utf8))
+                        let boards = try? decoder.decode([NCCommunicationDeckBoards].self, from: Data(jsonResponse.utf8))
                         completionHandler(account, boards, 0, "")
                     }
                 } else {

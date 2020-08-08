@@ -53,7 +53,7 @@ public struct NCCommunicationDeckUsers: Codable {
 public struct NCCommunicationDeckACL: Codable {
     public var participant: NCCommunicationDeckUsers
     public var type: Int = 0
-    public var boardID: Int = 0
+    public var boardId: Int = 0
     public var permissionEdit: Bool = false
     public var permissionShare: Bool = false
     public var permissionManage: Bool = false
@@ -61,25 +61,24 @@ public struct NCCommunicationDeckACL: Codable {
     public var id: Int = 0
 }
 
-public struct NCCommunicationDeckPermissions: Codable {
-    public var participant: NCCommunicationDeckUsers
-    public var type: Int = 0
-    public var boardID: Int = 0
-    public var permissionEdit: Bool = false
-    public var permissionShare: Bool = false
-    public var permissionManage: Bool = false
-    public var owner: Bool = false
-    public var id: Int = 0
-}
-
-public struct NCCommunicationBoards: Codable, Identifiable {
+public struct NCCommunicationDeckBoards: Codable, Identifiable {
     public var title: String = ""
-    public var owner: NCCommunicationDeckUsers
+    public struct owner: Codable {
+        public var primaryKey: String = ""
+        public var uid: String = ""
+        public var displayName: String = ""
+        public var type: Int = 0
+    }
     public var color: String = ""
     public var archived: Bool = false
     public var labels: [NCCommunicationDeckLabels]
     public var acl: [NCCommunicationDeckACL]
-    public var permissions: NCCommunicationDeckPermissions
+    public struct permissions: Codable {
+        public var PERMISSION_READ: Bool = false
+        public var PERMISSION_EDIT: Bool = false
+        public var PERMISSION_MANAGE: Bool = false
+        public var PERMISSION_SHARE: Bool = false
+    }
     public var users: [NCCommunicationDeckUsers]
     public var shared: Int = 0
     public var stacks: [NCCommunicationDeckStacks]
