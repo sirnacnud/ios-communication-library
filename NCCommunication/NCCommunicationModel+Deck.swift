@@ -10,9 +10,7 @@ public final class NCCommunicationDeckCards: NSObject, NSItemProviderReading, NS
         return decodedCard
     }
     
-    public static var writableTypeIdentifiersForItemProvider: [String] {
-        return ["com.nextcloud.deck.cards"]
-    }
+    public static var writableTypeIdentifiersForItemProvider: [String] = ["com.nextcloud.deck.cards"]
     
     public func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
         let progress = Progress(totalUnitCount: 100)
@@ -25,12 +23,9 @@ public final class NCCommunicationDeckCards: NSObject, NSItemProviderReading, NS
         }
         
         return progress
-        
     }
     
-    public static var readableTypeIdentifiersForItemProvider: [String] {
-        return ["com.nextcloud.deck.cards"]
-    }
+    public static var readableTypeIdentifiersForItemProvider: [String] =  ["com.nextcloud.deck.cards"]
     
     public var title: String = ""
     public var desc: String = ""
