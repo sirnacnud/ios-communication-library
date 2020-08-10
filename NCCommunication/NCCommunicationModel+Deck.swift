@@ -2,6 +2,7 @@
 // Using Swift 5.0
 
 import Foundation
+import MobileCoreServices
 
 public final class NCCommunicationDeckCards: NSObject, NSItemProviderReading, NSItemProviderWriting, Codable, Identifiable {
     public static func object(withItemProviderData data: Data, typeIdentifier: String) throws -> NCCommunicationDeckCards {
@@ -10,7 +11,9 @@ public final class NCCommunicationDeckCards: NSObject, NSItemProviderReading, NS
         return decodedCard
     }
     
-    public static var writableTypeIdentifiersForItemProvider: [String] = ["com.nextcloud.deck.cards"]
+    public static var writableTypeIdentifiersForItemProvider: [String] {
+        return [kUTTypeData as String]
+    }
     
     public func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
         let progress = Progress(totalUnitCount: 100)
@@ -25,7 +28,9 @@ public final class NCCommunicationDeckCards: NSObject, NSItemProviderReading, NS
         return progress
     }
     
-    public static var readableTypeIdentifiersForItemProvider: [String] =  ["com.nextcloud.deck.cards"]
+    public static var readableTypeIdentifiersForItemProvider: [String] {
+        return [kUTTypeData as String]
+    }
     
     public var title: String = ""
     public var desc: String = ""
