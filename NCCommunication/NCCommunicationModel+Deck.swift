@@ -6,7 +6,7 @@ import Foundation
 // Created for iOS Deck in 2020
 // Using Swift 5.0
 
-public final class NCCommunicationDeckCards: NSObject, NSItemProviderReading, NSItemProviderWriting, Codable {
+public final class NCCommunicationDeckCards: NSObject, NSItemProviderReading, NSItemProviderWriting, Codable, Identifiable {
     public static func object(withItemProviderData data: Data, typeIdentifier: String) throws -> NCCommunicationDeckCards {
         let decoder = JSONDecoder()
         let decodedCard = try decoder.decode(NCCommunicationDeckCards.self, from: data)
