@@ -101,9 +101,8 @@ extension NCCommunication {
         var headers = NCCommunicationCommon.shared.getStandardHeaders(addCustomHeaders, customUserAgent: customUserAgent)
         headers.update(.contentType("application/json"))
         
-        var parameters = [
-            "order": order
-        ]
+        var parameters: [String: Any] = [:]
+        parameters["order"] = order
         if newStackID != nil {
             parameters["stackId"] = newStackID!
         } else {
