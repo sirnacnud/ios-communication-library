@@ -98,7 +98,8 @@ extension NCCommunication {
         
         let method = HTTPMethod(rawValue: "PUT")
         
-        let headers = NCCommunicationCommon.shared.getStandardHeaders(addCustomHeaders, customUserAgent: customUserAgent)
+        var headers = NCCommunicationCommon.shared.getStandardHeaders(addCustomHeaders, customUserAgent: customUserAgent)
+        headers.update(.contentType("application/json"))
         
         var parameters = [
             "order": order
