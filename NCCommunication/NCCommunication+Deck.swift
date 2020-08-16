@@ -126,6 +126,7 @@ extension NCCommunication {
                     let errorDescription = json["ocs"]["meta"]["message"].string ?? NSLocalizedString("_invalid_data_format_", value: "Invalid data format", comment: "")
                     completionHandler(account, nil, statusCode, errorDescription)
                 }
+            }
         }
     }
 }
