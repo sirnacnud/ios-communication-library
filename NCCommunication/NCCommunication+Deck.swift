@@ -88,7 +88,7 @@ extension NCCommunication {
     public func moveCard(boardID: Int, stackID: Int, cardID: Int, order: Int, newStackID: Int?, customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ card: NCCommunicationDeckCards?, _ errorCode: Int, _ errorDescription: String) -> Void) {
         
         let account = NCCommunicationCommon.shared.account
-        let endpoint = "/boards/" + String(boardID) + "/stacks/" + String(stackID) + "/cards/" + String(cardID) + "/reorder"
+        let endpoint = "boards/" + String(boardID) + "/stacks/" + String(stackID) + "/cards/" + String(cardID) + "/reorder"
         
         guard let url = NCCommunicationCommon.shared.createStandardUrl(serverUrl: NCCommunicationCommon.shared.url, endpoint: endpoint) else {
             completionHandler(account, nil, NSURLErrorBadURL, NSLocalizedString("_invalid_url_", value: "Invalid server url", comment: ""))
