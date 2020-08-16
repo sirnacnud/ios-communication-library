@@ -109,7 +109,7 @@ extension NCCommunication {
             parameters["stackId"] = stackID
         }
         
-        sessionManager.request(url, method: method, parameters: parameters, encoding: URLEncoding.default, headers: headers, interceptor: nil).validate(statusCode: 200..<300).responseJSON {
+        sessionManager.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: headers, interceptor: nil).validate(statusCode: 200..<300).responseJSON {
             (response) in
             debugPrint(response)
             
