@@ -1,9 +1,9 @@
 // Created for NCCommunication in 2020
 // Using Swift 5.0
 
-import Foundation
+import MobileCoreServices
 
-public final class NCCommunicationDeckCards: NSObject, Codable, Identifiable {
+public final class NCCommunicationDeckCards: NSObject, Codable, Identifiable, NSItemProviderReading, NSItemProviderWriting {
     public var title: String = ""
     public var desc: String = ""
     public var stackId: Int = 0
@@ -44,6 +44,33 @@ public final class NCCommunicationDeckCards: NSObject, Codable, Identifiable {
         case commentsUnread
         case id
         case overdue
+    }
+    
+    public static func object(withItemProviderData data: Data, typeIdentifier: String) throws -> NCCommunicationDeckCards {
+        let decoder = JSONDecoder()
+        let decodedCard = try decoder.decode(NCCommunicationDeckCards.self, from: data)
+        return decodedCard
+    }
+    
+    public static var writableTypeIdentifiersForItemProvider: [String] {
+        return [kUTTypeData as String]
+    }
+    
+    public func loadData(withTypeIdentifier typeIdentifier: String, forItemProviderCompletionHandler completionHandler: @escaping (Data?, Error?) -> Void) -> Progress? {
+        let progress = Progress(totalUnitCount: 100)
+        do {
+            let data = try JSONEncoder().encode(self)
+            progress.completedUnitCount = 100
+            completionHandler(data, nil)
+        } catch {
+            completionHandler(nil, error)
+        }
+        
+        return progress
+    }
+    
+    public static var readableTypeIdentifiersForItemProvider: [String] {
+        return [kUTTypeData as String]
     }
 }
 
