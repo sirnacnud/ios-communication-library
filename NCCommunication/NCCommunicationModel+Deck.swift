@@ -3,7 +3,7 @@
 
 import Foundation
 
-public final class NCCommunicationDeckCards: Codable, Identifiable {
+public final class NCCommunicationDeckCards: NSObject, Codable, Identifiable {
     public var title: String = ""
     public var desc: String = ""
     public var stackId: Int = 0
