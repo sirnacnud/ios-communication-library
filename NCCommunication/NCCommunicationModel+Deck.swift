@@ -15,7 +15,7 @@ public final class NCCommunicationDeckCards: NSObject, Codable, Identifiable {
     public var assignedUsers: [NCCommunicationDeckUsers]? = []
     public var attachments: String? = nil
     public var attachmentCount: Int? = 0
-    public var owner: NCCommunicationDeckOwner? = nil
+    public var owner: NCCommunicationDeckUsers? = nil
     public var order: Int = 0
     public var archived: Bool = false
     public var duedate: String? = nil
@@ -47,51 +47,51 @@ public final class NCCommunicationDeckCards: NSObject, Codable, Identifiable {
     }
 }
 
-public enum NCCommunicationDeckOwner: Codable {
-    case string(String)
-    case innerItem(NCCommunicationDeckUsers)
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let x = try? container.decode(String.self) {
-            self = .string(x)
-            return
-        }
-        if let x = try? container.decode(NCCommunicationDeckUsers.self) {
-            self = .innerItem(x)
-            return
-        }
-        throw DecodingError.typeMismatch(NCCommunicationDeckUsers.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for MyValue"))
-    }
+public class NCCommunicationDeckCardsMin: Codable, Identifiable {
+    public var title: String = ""
+    public var desc: String = ""
+    public var stackId: Int = 0
+    public var type: String = ""
+    public var lastModified: Int = 0
+    public var lastEditor: String? = nil
+    public var createdAt: Int = 0
+    public var labels: [NCCommunicationDeckLabels]? = []
+    public var assignedUsers: [NCCommunicationDeckUsers]? = []
+    public var attachments: String? = nil
+    public var attachmentCount: Int? = 0
+    public var owner: String? = nil
+    public var order: Int = 0
+    public var archived: Bool = false
+    public var duedate: String? = nil
+    public var deletedAt: Int = 0
+    public var commentsUnread: Int = 0
+    public var id: Int = 0
+    public var overdue: Int = 0
     
-    public var innerItemValue: NCCommunicationDeckUsers? {
-        switch self {
-        case .innerItem(let ii):
-            return ii
-        default:
-            return nil
-        }
-    }
-
-    public var stringValue: String? {
-        switch self {
-        case .string(let s):
-            return s
-        default:
-            return nil
-        }
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case .string(let x):
-            try container.encode(x)
-        case .innerItem(let x):
-            try container.encode(x)
-        }
+    private enum CodingKeys: String, CodingKey {
+        case title
+        case desc = "description"
+        case stackId
+        case type
+        case lastModified
+        case lastEditor
+        case createdAt
+        case labels
+        case assignedUsers
+        case attachments
+        case attachmentCount
+        case owner
+        case order
+        case archived
+        case duedate
+        case deletedAt
+        case commentsUnread
+        case id
+        case overdue
     }
 }
+
+
 
 public struct NCCommunicationDeckStacks: Codable, Identifiable {
     public var title: String = ""

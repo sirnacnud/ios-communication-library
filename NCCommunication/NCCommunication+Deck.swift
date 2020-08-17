@@ -86,24 +86,24 @@ extension NCCommunication {
     }
     
 //    public func getCards(boardID: Int, stackID: Int, customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ cards: [NCCommunicationDeckCards]?, _ errorCode: Int, _ errorDescription: String) -> Void) {
-//        
+//
 //        let account = NCCommunicationCommon.shared.account
 //        let serverUrlEndpoint = NCCommunicationCommon.shared.url + "/index.php/apps/deck/api/v1.0/boards/\(boardID)/stacks/\(stackID)"
-//        
+//
 //        guard let url = NCCommunicationCommon.shared.encodeStringToUrl(serverUrlEndpoint) else {
 //            completionHandler(account, nil, NSURLErrorBadURL, NSLocalizedString("_invalid_url_", value: "Invalid server url", comment: ""))
 //            return
 //        }
-//        
+//
 //        let method = HTTPMethod(rawValue: "GET")
-//        
+//
 //        var headers = NCCommunicationCommon.shared.getStandardHeaders(addCustomHeaders, customUserAgent: customUserAgent)
 //        headers.update(.contentType("application/json"))
-//        
+//
 //        sessionManager.request(url, method: method, parameters: nil, encoding: URLEncoding.default, headers: headers).validate(statusCode: 200..<300).responseJSON() {
 //            (response) in
 //            debugPrint(response)
-//            
+//
 //            switch response.result {
 //            case .failure(let error):
 //                let error = NCCommunicationError().getError(error: error, httResponse: response.response)
@@ -127,7 +127,7 @@ extension NCCommunication {
 //        }
 //    }
     
-    public func reorderCards(boardID: Int, card: NCCommunicationDeckCards, order: Int, newStackID: Int?, customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ card: [NCCommunicationDeckCards]?, _ errorCode: Int, _ errorDescription: String) -> Void) {
+    public func reorderCards(boardID: Int, card: NCCommunicationDeckCards, order: Int, newStackID: Int?, customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ card: [NCCommunicationDeckCardsMin]?, _ errorCode: Int, _ errorDescription: String) -> Void) {
         
         let account = NCCommunicationCommon.shared.account
         
@@ -164,7 +164,7 @@ extension NCCommunication {
                     if let jsonResponse = String(data: data, encoding: String.Encoding.utf8) {
                         let decoder = JSONDecoder()
                         do {
-                            let cards = try decoder.decode([NCCommunicationDeckCards].self, from: Data(jsonResponse.utf8))
+                            let cards = try decoder.decode([NCCommunicationDeckCardsMin].self, from: Data(jsonResponse.utf8))
                             completionHandler(account, cards, 0, "")
                         } catch {
                             print(error)
