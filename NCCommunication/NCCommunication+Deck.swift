@@ -201,6 +201,8 @@ extension NCCommunication {
         params["order"] = card.order
         params["owner"] = card.owner
         
+        print(params)
+        
         sessionManager.request(url, method: method, parameters: params, encoding: JSONEncoding.default, headers: headers, interceptor: nil).validate(statusCode: 200..<300).responseJSON {
             (response) in
             debugPrint(response)

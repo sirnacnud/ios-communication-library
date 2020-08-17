@@ -1,8 +1,6 @@
 // Created for NCCommunication in 2020
 // Using Swift 5.0
 
-import MobileCoreServices
-
 public final class NCCommunicationDeckCards: NSObject, Codable, Identifiable {
     public var title: String = ""
     public var desc: String = ""
