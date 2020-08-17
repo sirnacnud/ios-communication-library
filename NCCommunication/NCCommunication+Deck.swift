@@ -136,7 +136,7 @@ extension NCCommunication {
         }
     }
     
-    public func updateCard(boardID: Int, card: NCCommunicationDeckCards, order: Int, newStackID: Int?, customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ card: NCCommunicationDeckCards?, _ errorCode: Int, _ errorDescription: String) -> Void) {
+    public func updateCard(boardID: Int, card: NCCommunicationDeckCards, customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ card: NCCommunicationDeckCards?, _ errorCode: Int, _ errorDescription: String) -> Void) {
         
         let account = NCCommunicationCommon.shared.account
         
