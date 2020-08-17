@@ -196,7 +196,7 @@ extension NCCommunication {
         
         var params: [String: Any] = [:]
         params["title"] = card.title
-        params["description"] = card.description
+        params["description"] = card.desc
         params["type"] = "plain"
         params["order"] = card.order
         params["owner"] = card.owner
