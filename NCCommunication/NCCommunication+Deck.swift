@@ -113,8 +113,8 @@ extension NCCommunication {
                     if let jsonResponse = String(data: data, encoding: String.Encoding.utf8) {
                         let decoder = JSONDecoder()
                         do {
-                            let cards = try decoder.decode([NCCommunicationDeckCards].self, from: Data(jsonResponse.utf8))
-                            completionHandler(account, cards, 0, "")
+                            let stack = try decoder.decode(NCCommunicationDeckStacks.self, from: Data(jsonResponse.utf8))
+                            completionHandler(account, stack.cards, 0, "")
                         } catch {
                             print(error)
                             completionHandler(account, nil, NSURLErrorBadServerResponse, error.localizedDescription)
