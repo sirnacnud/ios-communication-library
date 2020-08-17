@@ -199,7 +199,6 @@ extension NCCommunication {
         params["description"] = card.desc
         params["type"] = "plain"
         params["order"] = card.order
-        params["owner"] = card.owner
         
         print(params)
         
