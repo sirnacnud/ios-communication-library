@@ -15,7 +15,7 @@ public final class NCCommunicationDeckCards: NSObject, Codable, Identifiable {
     public var assignedUsers: [NCCommunicationDeckUsers]? = []
     public var attachments: String? = nil
     public var attachmentCount: Int? = 0
-    public var owner: NCCommunicationDeckUsers? = nil
+    public var owner: NCCommunicationDeckOwner? = nil
     public var order: Int = 0
     public var archived: Bool = false
     public var duedate: String? = nil
@@ -44,6 +44,52 @@ public final class NCCommunicationDeckCards: NSObject, Codable, Identifiable {
         case commentsUnread
         case id
         case overdue
+    }
+}
+
+public enum NCCommunicationDeckOwner: Codable {
+    case string(String)
+    case innerItem(NCCommunicationDeckUsers)
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let x = try? container.decode(String.self) {
+            self = .string(x)
+            return
+        }
+        if let x = try? container.decode(NCCommunicationDeckUsers.self) {
+            self = .innerItem(x)
+            return
+        }
+        throw DecodingError.typeMismatch(NCCommunicationDeckUsers.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for MyValue"))
+    }
+    
+    public var innerItemValue: NCCommunicationDeckUsers? {
+        switch self {
+        case .innerItem(let ii):
+            return ii
+        default:
+            return nil
+        }
+    }
+
+    public var stringValue: String? {
+        switch self {
+        case .string(let s):
+            return s
+        default:
+            return nil
+        }
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .string(let x):
+            try container.encode(x)
+        case .innerItem(let x):
+            try container.encode(x)
+        }
     }
 }
 
