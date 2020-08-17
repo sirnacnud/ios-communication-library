@@ -39,10 +39,10 @@ public final class NCCommunicationDeckCards: NSObject, NSItemProviderReading, NS
     public var lastModified: Int = 0
     public var lastEditor: String? = nil
     public var createdAt: Int = 0
-    public var labels: [NCCommunicationDeckLabels] = []
-    public var assignedUsers: [NCCommunicationDeckUsers] = []
+    public var labels: [NCCommunicationDeckLabels]? = []
+    public var assignedUsers: [NCCommunicationDeckUsers]? = []
     public var attachments: String? = nil
-    public var attachmentCount: Int = 0
+    public var attachmentCount: Int? = 0
     public var owner: NCCommunicationDeckUsers
     public var order: Int = 0
     public var archived: Bool = false
