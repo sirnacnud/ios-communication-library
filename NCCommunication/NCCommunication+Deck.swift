@@ -85,11 +85,11 @@ extension NCCommunication {
         }
     }
     
-    public func moveCard(boardID: Int, stackID: Int, cardID: Int, order: Int, newStackID: Int?, customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ card: NCCommunicationDeckCards?, _ errorCode: Int, _ errorDescription: String) -> Void) {
+    public func reorderCards(boardID: Int, card: NCCommunicationDeckCards, order: Int, newStackID: Int?, customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ card: [NCCommunicationDeckCards]?, _ errorCode: Int, _ errorDescription: String) -> Void) {
         
         let account = NCCommunicationCommon.shared.account
         
-        let serverUrlEndpoint = NCCommunicationCommon.shared.url + "/index.php/apps/deck/api/v1.0/boards/\(boardID)/stacks/\(stackID)/cards/\(cardID)/reorder"
+        let serverUrlEndpoint = NCCommunicationCommon.shared.url + "/index.php/apps/deck/api/v1.0/boards/\(boardID)/stacks/\(card.stackId)/cards/\(card.id)/reorder"
         
         guard let url = NCCommunicationCommon.shared.encodeStringToUrl(serverUrlEndpoint) else {
             completionHandler(account, nil, NSURLErrorBadURL, NSLocalizedString("_invalid_url_", value: "Invalid server url", comment: ""))
@@ -101,15 +101,15 @@ extension NCCommunication {
         var headers = NCCommunicationCommon.shared.getStandardHeaders(addCustomHeaders, customUserAgent: customUserAgent)
         headers.update(.contentType("application/json"))
         
-        var parameters: [String: Any] = [:]
-        parameters["order"] = order
+        var params: [String: Any] = [:]
+        params["order"] = order
         if newStackID != nil {
-            parameters["stackId"] = newStackID!
+            params["stackId"] = newStackID!
         } else {
-            parameters["stackId"] = stackID
+            params["stackId"] = card.stackId
         }
         
-        sessionManager.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: headers, interceptor: nil).validate(statusCode: 200..<300).responseJSON {
+        sessionManager.request(url, method: method, parameters: params, encoding: JSONEncoding.default, headers: headers, interceptor: nil).validate(statusCode: 200..<300).responseJSON {
             (response) in
             debugPrint(response)
             
@@ -117,19 +117,75 @@ extension NCCommunication {
             case .failure(let error):
                 let error = NCCommunicationError().getError(error: error, httResponse: response.response)
                 completionHandler(account, nil, error.errorCode, error.description ?? "")
-            case .success(let json):
-                let json = JSON(json)
-                
-                let statusCode = json["ocs"]["meta"]["statuscode"].int ?? NCCommunicationError().getInternalError()
-                if statusCode == 200 {
-                    completionHandler(account, nil, 0, "")
-                }  else {
-                    let errorDescription = json["ocs"]["meta"]["message"].string ?? NSLocalizedString("_invalid_data_format_", value: "Invalid data format", comment: "")
-                    completionHandler(account, nil, statusCode, errorDescription)
+            case .success( _):
+                if let data = response.data {
+                    if let jsonResponse = String(data: data, encoding: String.Encoding.utf8) {
+                        let decoder = JSONDecoder()
+                        do {
+                            let cards = try decoder.decode([NCCommunicationDeckCards].self, from: Data(jsonResponse.utf8))
+                            completionHandler(account, cards, 0, "")
+                        } catch {
+                            print(error)
+                            completionHandler(account, nil, NSURLErrorBadServerResponse, error.localizedDescription)
+                        }
+                    }
+                } else {
+                    completionHandler(account, nil, NSURLErrorBadServerResponse, NSLocalizedString("_error_decode_xml_", value: "Invalid response, error decode XML", comment: ""))
                 }
             }
         }
     }
+    
+    public func updateCard(boardID: Int, card: NCCommunicationDeckCards, order: Int, newStackID: Int?, customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ card: NCCommunicationDeckCards?, _ errorCode: Int, _ errorDescription: String) -> Void) {
+        
+        let account = NCCommunicationCommon.shared.account
+        
+        let serverUrlEndpoint = NCCommunicationCommon.shared.url + "/index.php/apps/deck/api/v1.0/boards/\(boardID)/stacks/\(card.stackId)/cards/\(card.id)"
+        
+        guard let url = NCCommunicationCommon.shared.encodeStringToUrl(serverUrlEndpoint) else {
+            completionHandler(account, nil, NSURLErrorBadURL, NSLocalizedString("_invalid_url_", value: "Invalid server url", comment: ""))
+            return
+        }
+        
+        let method = HTTPMethod(rawValue: "PUT")
+        
+        var headers = NCCommunicationCommon.shared.getStandardHeaders(addCustomHeaders, customUserAgent: customUserAgent)
+        headers.update(.contentType("application/json"))
+        
+        var params: [String: Any] = [:]
+        params["title"] = card.title
+        params["description"] = card.description
+        params["type"] = "plain"
+        params["order"] = card.order
+        params["owner"] = card.owner
+        
+        sessionManager.request(url, method: method, parameters: params, encoding: JSONEncoding.default, headers: headers, interceptor: nil).validate(statusCode: 200..<300).responseJSON {
+            (response) in
+            debugPrint(response)
+            
+            switch response.result {
+            case .failure(let error):
+                let error = NCCommunicationError().getError(error: error, httResponse: response.response)
+                completionHandler(account, nil, error.errorCode, error.description ?? "")
+            case .success( _):
+                if let data = response.data {
+                    if let jsonResponse = String(data: data, encoding: String.Encoding.utf8) {
+                        let decoder = JSONDecoder()
+                        do {
+                            let card = try decoder.decode(NCCommunicationDeckCards.self, from: Data(jsonResponse.utf8))
+                            completionHandler(account, card, 0, "")
+                        } catch {
+                            print(error)
+                            completionHandler(account, nil, NSURLErrorBadServerResponse, error.localizedDescription)
+                        }
+                    }
+                } else {
+                    completionHandler(account, nil, NSURLErrorBadServerResponse, NSLocalizedString("_error_decode_xml_", value: "Invalid response, error decode XML", comment: ""))
+                }
+            }
+        }
+    }
+    
 }
 
 //    @objc public func putComments(fileId: String, message: String, customUserAgent: String? = nil, addCustomHeaders: [String: String]? = nil, completionHandler: @escaping (_ account: String, _ errorCode: Int, _ errorDescription: String) -> Void) {
