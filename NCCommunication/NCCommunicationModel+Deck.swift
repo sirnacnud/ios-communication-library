@@ -1,6 +1,9 @@
 // Created for NCCommunication in 2020
 // Using Swift 5.0
 
+
+import Foundation
+
 public final class NCCommunicationDeckCards: NSObject, Codable, Identifiable {
     public var title: String = ""
     public var desc: String = ""
@@ -127,24 +130,21 @@ public struct NCCommunicationDeckACL: Codable {
     public var id: Int = 0
 }
 
+public struct NCCommunicationDeckPermissions: Codable {
+    public var PERMISSION_READ: Bool = false
+    public var PERMISSION_EDIT: Bool = false
+    public var PERMISSION_MANAGE: Bool = false
+    public var PERMISSION_SHARE: Bool = false
+}
+
 public struct NCCommunicationDeckBoards: Codable, Identifiable {
     public var title: String = ""
-    public struct owner: Codable {
-        public var primaryKey: String = ""
-        public var uid: String = ""
-        public var displayname: String = ""
-        public var type: Int = 0
-    }
+    public var owner: NCCommunicationDeckUsers
+    public var permissions: NCCommunicationDeckPermissions
     public var color: String = ""
     public var archived: Bool = false
     public var labels: [NCCommunicationDeckLabels]
     public var acl: [NCCommunicationDeckACL]
-    public struct permissions: Codable {
-        public var PERMISSION_READ: Bool = false
-        public var PERMISSION_EDIT: Bool = false
-        public var PERMISSION_MANAGE: Bool = false
-        public var PERMISSION_SHARE: Bool = false
-    }
     public var users: [NCCommunicationDeckUsers]
     public var shared: Int = 0
     public var stacks: [NCCommunicationDeckStacks]
