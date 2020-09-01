@@ -46,6 +46,28 @@ public final class NCCommunicationDeckCards: NSObject, Codable, Identifiable {
         case id
         case overdue
     }
+    
+    init(title: String, desc: String, stackID: Int, type: String, lastModified: Int, lastEditor: String?, createdAt: Int, labels: [NCCommunicationDeckLabels]?, assignedUsers: [NCCommunicationDeckUsers]?, attachments: String?, attachmentCount: Int?, owner: NCCommunicationDeckUsers?, order: Int, archived: Bool, duedate: String?, deletedAt: Int, commentsUnread: Int, id: Int, overdue: Int) {
+        self.title = title
+        self.desc = desc
+        self.stackId = stackID
+        self.type = type
+        self.lastModified = lastModified
+        self.lastEditor = lastEditor
+        self.createdAt = createdAt
+        self.labels = labels
+        self.assignedUsers = assignedUsers
+        self.attachments = attachments
+        self.attachmentCount = attachmentCount
+        self.owner = owner
+        self.order = order
+        self.archived = archived
+        self.duedate = duedate
+        self.deletedAt = deletedAt
+        self.commentsUnread = commentsUnread
+        self.id = id
+        self.overdue = overdue
+    }
 }
 
 public class NCCommunicationDeckCardsMin: Codable, Identifiable {
