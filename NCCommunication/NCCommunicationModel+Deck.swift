@@ -4,7 +4,7 @@
 
 import Foundation
 
-public final class NCCommunicationDeckCards: NSObject, Codable, Identifiable {
+public final class NCCommunicationDeckCards: NSObject, Codable, Identifiable, NSCopying {
     public var title: String = ""
     public var desc: String = ""
     public var stackId: Int = 0
@@ -67,6 +67,11 @@ public final class NCCommunicationDeckCards: NSObject, Codable, Identifiable {
         self.commentsUnread = commentsUnread
         self.id = id
         self.overdue = overdue
+    }
+    
+    public func copy(with zone: NSZone? = nil) -> Any {
+        let card = NCCommunicationDeckCards(title: self.title, desc: self.desc, stackID: self.stackId, type: self.type, lastModified: self.lastModified, lastEditor: self.lastEditor, createdAt: self.createdAt, labels: self.labels, assignedUsers: self.assignedUsers, attachments: self.attachments, attachmentCount: self.attachmentCount, owner: self.owner, order: self.order, archived: self.archived, duedate: self.duedate, deletedAt: self.deletedAt, commentsUnread: self.commentsUnread, id: self.id, overdue: self.overdue)
+        return card
     }
 }
 
